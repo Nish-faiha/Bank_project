@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New Page</title>
+    <style>
+        align:center;
+    </style>
+</head>
+<body>
+{% csrf_token %}
+</h1><a href="{% url 'customer' %}"><button type="button" >Fill Your Details!</button></a>
+</body>
+</html>
+{% endblock %}

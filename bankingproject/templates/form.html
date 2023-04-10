@@ -1,0 +1,232 @@
+{% extends 'base.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Registration</title>
+    <style>
+
+
+        table {
+            border: 8px outset;
+            border-radius: 10px;
+            border-spacing: 10px;
+            padding: 20px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<!--<script>
+$(document).ready(function(){
+  $("form").submit(function(){
+    alert("Application Accepted");
+  });
+});
+</script>-->
+
+</head>
+<body style="background-color:Beige;">
+<div class="container">
+    <div class="row">
+  <div class="col-md-12 mb-12">
+    <div class="card mb-8">
+      <div class="card-header py-3">
+<form method="post" enctype="multipart/form-data" id="form" action="{% url 'submit' %}" >
+       {% csrf_token %}
+    <h1 align="center">Form</h1>
+    <hr>
+    <h3 align="center">Please complete the form below</h3>
+    <hr>
+    <br>
+
+<div class="container">
+  <div class="row">
+     <div class="col-25">
+         <label>Name:</label>
+     </div>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+     <div class="col-75">
+         <input type="text" name="Name" placeholder="Enter your Name" required><br>
+     </div>
+  </div>
+  <div class="row">
+    <div class="col-25">
+      <label>DOB:</label>
+    </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <div class="col-75">
+      <input type="date" name="DOB" required>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-25">
+      <label>Age:</label>
+    </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <div class="col-75">
+      <input type="number" name="Age" placeholder="Enter your Age" required>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-25">
+      <label>Gender:</label>
+    </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <div class="col-75">
+      <input type="radio" name="Gender"><label>Male</label>
+      <input type="radio" name="Gender"><label>Female</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-25">
+      <label>Phone Number:</label>
+    </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <div class="col-75">
+      <input type="tel" name="number" placeholder="Enter your Phone Number" required >
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-25">
+      <label>Email Id:</label>
+    </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <div class="col-75">
+      <input type="email" name="email-id" placeholder="Enter your Email" required>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-25">
+      <label>Address:</label>
+    </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <div class="col-75">
+      <input type="text" name="address" placeholder="Enter your Address" required>
+    </div>
+  </div>
+<div class="row">
+    <div class="col-25">
+
+<label >Select your District:</label>&nbsp;&nbsp;
+<select id='districts' onchange='districtChanged(this.value);'>
+<option value=''>Select District</option>
+<option value='Kollam'>Kollam</option>
+<option value='Thiruvananthapuram'>Thiruvananthapuram</option>
+<option value='Ernakulam'>Ernakulam</option>
+    <option value="Thrissur">Thrissur</option>
+    <option value="Kottayam">Kottayam</option>
+</select>
+
+&nbsp;&nbsp;
+        <br>
+         <label >Select your Branch:</label>&nbsp;&nbsp;
+
+<select id='branches' onchange='branchChanged(this.value);'>
+
+<option value=''>Select Branch</option>
+</select>
+&nbsp;&nbsp;
+  </div>&nbsp;&nbsp;&nbsp;
+  <div class="col-75">
+
+<script type="text/javascript">
+var branchesKollam=["Umayanalloor", "Pallimukku", "Kottiyam"];
+var branchesThiruvananthapuram=["Attingal", "Kallambalam", "Thampannoor"];
+var branchesErnakulam=["Kakkanad", "Edapally", "Kaloor"];
+var branchesThrissur=["Chalakkudi", "Athirappally", "Iranjalikkuda"];
+var branchesKottayam=["Pala", "Eerattupetta", "Ettumanoor"];
+
+
+function districtChanged(district)
+{
+var selectBranch = document.getElementById('branches');
+var ln = selectBranch.length - 1;
+while (ln > 0)
+{
+selectBranch.remove(1); //Remove all but "Select Branch"
+ln--;
+}
+
+
+
+var branchArray;
+
+switch(district)
+{
+case "Kollam":
+branchArray=branchesKollam
+break;
+case "Thiruvananthapuram":
+branchArray=branchesThiruvananthapuram
+break;
+case "Ernakulam":
+branchArray=branchesErnakulam
+break;
+case "Thrissur":
+branchArray=branchesThrissur
+break;
+case "Kottayam":
+branchArray=branchesKottayam
+break;
+default:
+}
+
+for (i = 0; i < branchArray.length; i++)
+{
+var option = document.createElement('option');
+option.text = branchArray[i];
+option.value = branchArray[i];
+selectBranch.add(option);
+}
+}
+
+
+</script>
+</div>
+</div>
+<div class="row">
+   <div class="col-25">
+      <label>Account Type:</label>
+   </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <div class="col-75">
+      <select name="account" required>
+        <option value="sc">Select your Account Type</option>
+        <option value="Current">Current</option>
+        <option value="savings">Savings</option>
+      </select>
+    </div>
+</div>
+<div class="row">
+    <div class="col-25">
+      <label class="form-check-label" >Materials Provide:</label>
+    </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <div class="col-75">
+      <input type="checkbox" value="debit" name="debitcard"><label>Debit Card</label>
+      <input type="checkbox" value="credit" name="creditcard"><label>Credit Card</label>
+      <input type="checkbox" value="cheque" name="chequebook"><label>Cheque Book</label>
+    </div>
+</div>
+        <br><br>
+<div class="row">
+   <a href="{% url 'submit' %}"><button class="btn btn-success" type="submit" id="submit" >Submit</button></a>
+
+</div><br><br>
+
+</div>
+</form>&nbsp;
+    <div class="container">
+    <div class="row">
+        <a href="{% url 'base' %}"><button class="btn btn-primary" type="logout">Logout</button></a>
+    </div>
+</div>
+</div>
+    </div>
+  </div>
+    </div>
+</div>
+
+</div>
+</body>
+
+</html>
+{% endblock %}
+
